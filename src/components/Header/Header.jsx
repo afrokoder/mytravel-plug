@@ -12,7 +12,7 @@ const Header = () => {
           MyTravel Plug
         </Typography>
         <Box display="flex">
-          <Typography variant="h5" className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
             Explore new places to go!
           </Typography>
           {/* <Autocomplete> */}
