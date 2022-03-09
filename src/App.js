@@ -9,8 +9,6 @@ const App = () => {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
-  const [childClicked, setChildClicked] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -21,10 +19,8 @@ const App = () => {
   }, []); // we want to run this only once at the beginning
 
   useEffect(() => {
-    setIsLoading(true);
     getPlacesData(bounds.sw, bounds.ne).then((data) => {
       setPlaces(data);
-      setIsLoading(false);
     });
   }, [coordinates, bounds]); //we want to re-run this effect when coordinates or bounds change
   return (
@@ -33,20 +29,13 @@ const App = () => {
       <Header />
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
-          <List
-            places={places}
-            childClicked={childClicked}
-            isLoading={isLoading}
-          />
+          <List places={places} />
         </Grid>
-
         <Grid item xs={12} md={8}>
           <Map
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
-            places={places}
-            setChildClicked={setChildClicked}
           />
         </Grid>
       </Grid>
